@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 
 const Form = () => {
     const [title, setTitle] = useState('')
+    const [details, setDetails] = useState('')
+    const [notes, setNotes] = useState('')
     
     return (<form>
         <input
@@ -12,9 +14,19 @@ const Form = () => {
             required
         />
         {/* category (req)- dd + text input button */}
-        {/* description- textarea */}
+        <textarea
+            type="text"
+            value={details}
+            onChange={event => setDetails(event.target.value)}
+            placeholder="Enter Task Details"
+        />
         {/* date due- date picker */}
-        {/* notes- textarea */}
+        <textarea
+            type="text"
+            value={notes}
+            onChange={event => setNotes(event.target.value)}
+            placeholder="Enter Task Notes"
+        />
         {/* submit button- on submit, date added generated */}
         {/* clear button */}
     </form>)
