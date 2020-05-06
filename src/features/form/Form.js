@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 const Form = () => {
     const [title, setTitle] = useState('')
     const [details, setDetails] = useState('')
     const [notes, setNotes] = useState('')
     const [category, setCategory] = useState('')
-    
+
     return (<form>
         <input
             type="text"
