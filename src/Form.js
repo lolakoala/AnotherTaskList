@@ -4,6 +4,7 @@ const Form = () => {
     const [title, setTitle] = useState('')
     const [details, setDetails] = useState('')
     const [notes, setNotes] = useState('')
+    const [category, setCategory] = useState('')
     
     return (<form>
         <input
@@ -13,7 +14,14 @@ const Form = () => {
             placeholder="Enter Task Title"
             required
         />
-        {/* category (req)- dd + text input button */}
+        {/* if there are categories in redux, populate dropdown */}
+        {/* and render instructions to select one or submit new */}
+        <input
+            type="category"
+            value={category}
+            onChange={event => setCategory(event.target.value)}
+            placeholder="Enter Category"
+        />
         <textarea
             type="text"
             value={details}
