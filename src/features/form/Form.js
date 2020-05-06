@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
+import { addTask, addTaskAsync } from '../tasks/tasksSlice'
+import { useDispatch } from 'react-redux'
 
 const Form = () => {
+    const dispatch = useDispatch()
     const [title, setTitle] = useState('')
     const [details, setDetails] = useState('')
     const [notes, setNotes] = useState('')
     const [category, setCategory] = useState('')
+    const [dueDate, setDuedate] = useState(null) 
 
     return (<form>
         <input
@@ -35,8 +39,21 @@ const Form = () => {
             onChange={event => setNotes(event.target.value)}
             placeholder="Enter Task Notes"
         />
-        {/* submit button- on submit, date added generated */}
-        {/* clear button */}
+        <button
+            onClick={() => dispatch(addTask({
+                title, 
+                details,
+                category,
+                dueDate,
+            }))}>Submit New Task</button>
+        <button
+            onClick={() => {
+                setTitle('')
+                setDetails('')
+                setNotes('')
+                setCategory('')
+                setDuedate(null)
+            }}>Clear Task Form</button>
     </form>)
 }
 
