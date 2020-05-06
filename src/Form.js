@@ -1,8 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 const Form = () => {
+    const [title, setTitle] = useState('')
+    
     return (<form>
-        {/* title (req)- text input */}
+        <input
+            type="text"
+            value={title}
+            onChange={event => setTitle(event.target.value)}
+            placeholder="Enter Task Title"
+            required
+        />
         {/* category (req)- dd + text input button */}
         {/* description- textarea */}
         {/* date due- date picker */}
