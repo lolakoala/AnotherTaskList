@@ -39,4 +39,7 @@ export const addTaskAsync = task => dispatch => {
     }, 1000)
 }
 
+// selector
+export const selectTasks = state => state.tasks
+
 export default tasksSlice.reducer
