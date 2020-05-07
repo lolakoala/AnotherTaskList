@@ -11,6 +11,13 @@ const Form = () => {
     const [notes, setNotes] = useState('')
     const [category, setCategory] = useState('')
     const [dueDate, setDueDate] = useState(new Date()) 
+    const clearForm = () => {
+        setTitle('')
+        setDetails('')
+        setNotes('')
+        setCategory('')
+        setDueDate(new Date())
+    }
 
     return (<div>
         <input
@@ -48,21 +55,15 @@ const Form = () => {
         />
         <button
             onClick={() => {
-                return dispatch(addTask({
+                dispatch(addTask({
                 title, 
                 details,
                 category,
-                dueDate: dueDate.toISOString(),
-            }))
+                dueDate: dueDate.toISOString(),}))
+                clearForm()
+
             }}>Submit New Task</button>
-        <button
-            onClick={() => {
-                setTitle('')
-                setDetails('')
-                setNotes('')
-                setCategory('')
-                setDueDate(new Date())
-            }}>Clear Task Form</button>
+        <button onClick={clearForm}>Clear Task Form</button>
     </div>)
 }
 
