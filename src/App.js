@@ -9,8 +9,10 @@ function App() {
     {/* keeping counter in as reference */}
 
       <div className="App">
-        <h1>Another Task List</h1>
-        {/* pre populate button */}
+        <header>
+          <h1>Another Task List</h1>
+          <button>Sandbox Mode</button>
+        </header>  
         <Form />
         <Tasks />
       </div>
