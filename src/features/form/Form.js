@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { addTask, addTaskAsync } from '../tasks/tasksSlice'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { addTask } from '../tasks/tasksSlice'
 import { useDispatch } from 'react-redux'
 
 const Form = () => {
@@ -8,9 +10,9 @@ const Form = () => {
     const [details, setDetails] = useState('')
     const [notes, setNotes] = useState('')
     const [category, setCategory] = useState('')
-    const [dueDate, setDuedate] = useState(null) 
+    const [dueDate, setDueDate] = useState(new Date()) 
 
-    return (<form>
+    return (<div>
         <input
             type="text"
             value={title}
@@ -25,6 +27,7 @@ const Form = () => {
             value={category}
             onChange={event => setCategory(event.target.value)}
             placeholder="Enter Category"
+            // conditional require
         />
         <textarea
             type="text"
@@ -32,7 +35,11 @@ const Form = () => {
             onChange={event => setDetails(event.target.value)}
             placeholder="Enter Task Details"
         />
-        {/* date due- date picker */}
+        {/* needs label */}
+        <DatePicker
+            selected={dueDate} 
+            onChange={date => setDueDate(date)}
+        />
         <textarea
             type="text"
             value={notes}
@@ -40,21 +47,23 @@ const Form = () => {
             placeholder="Enter Task Notes"
         />
         <button
-            onClick={() => dispatch(addTask({
+            onClick={() => {
+                return dispatch(addTask({
                 title, 
                 details,
                 category,
-                dueDate,
-            }))}>Submit New Task</button>
+                dueDate: dueDate.toISOString(),
+            }))
+            }}>Submit New Task</button>
         <button
             onClick={() => {
                 setTitle('')
                 setDetails('')
                 setNotes('')
                 setCategory('')
-                setDuedate(null)
+                setDueDate(new Date())
             }}>Clear Task Form</button>
-    </form>)
+    </div>)
 }
 
 export default Form
