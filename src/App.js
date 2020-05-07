@@ -12,9 +12,11 @@ function App() {
         <header>
           <h1>Another Task List</h1>
           <button>Sandbox Mode</button>
-        </header>  
-        <Form />
-        <Tasks />
+        </header>
+        <div className='body'>
+          <Form />
+          <Tasks />
+        </div>  
       </div>
     </div>
   );

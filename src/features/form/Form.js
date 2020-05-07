@@ -33,7 +33,7 @@ const Form = () => {
         setPriority(event.target.value)
     }
 
-    return (<div>
+    return (<div className='form'>
         <input
             type="text"
             value={title}
