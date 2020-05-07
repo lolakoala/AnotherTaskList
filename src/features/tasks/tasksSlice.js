@@ -5,9 +5,9 @@ export const tasksSlice = createSlice({
     initialState: [{
         title: 'example1- Grocery Shopping',
         details: 'Take inventory of kitchen, plan meals, and order groceries on Instacart.',
-        createdAt: new Date('05/01/2020'),
+        createdAt: new Date('05/01/2020').toISOString(),
         updatedAt: null,
-        dueDate: new Date('11/01/2020'),
+        dueDate: new Date('11/01/2020').toISOString(),
         dateCompleted: null,
         notes: 'Don\'t forget Rhonda\'s juice!',
         // category: Category['id'],
@@ -23,9 +23,10 @@ export const tasksSlice = createSlice({
         }],
     reducers: {
         addTask: (state, action) => {
+            const createdAt = new Date().toISOString()
             const newTask = {
                 ...action.payload, 
-                createdAt: new Date().toISOString(), 
+                createdAt, 
                 updatedAt: null,
                 dateCompleted: null,
                 }
