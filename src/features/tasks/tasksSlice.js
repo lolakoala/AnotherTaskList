@@ -30,7 +30,7 @@ export const tasksSlice = createSlice({
                 updatedAt: null,
                 dateCompleted: null,
                 }
-            state = [...state, newTask]
+            return [...state, newTask]
         }
     }
 })
