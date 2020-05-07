@@ -10,17 +10,20 @@ export const tasksSlice = createSlice({
         dueDate: new Date('11/01/2020').toISOString(),
         dateCompleted: null,
         notes: 'Don\'t forget Rhonda\'s juice!',
-        // category: Category['id'],
-    }, {
-            title: 'example2- Weed the Garden',
-            details: 'Weed container garden and front flower bed. Clip any dead areas of plants.',
-            createdAt: new Date('05/01/2020').toISOString(),
-            updatedAt: null,
-            dueDate: new Date('10/22/2020').toISOString(),
-            dateCompleted: null,
-            notes: 'Look out for the Asian giant hornet!',
-            // category: Category['id'],
-        }],
+        category: 'household chores',
+        priority: 'medium',
+    }, 
+    {
+        title: 'example2- Weed the Garden',
+        details: 'Weed container garden and front flower bed. Clip any dead areas of plants.',
+        createdAt: new Date('05/01/2020').toISOString(),
+        updatedAt: null,
+        dueDate: new Date('10/22/2020').toISOString(),
+        dateCompleted: null,
+        notes: 'Look out for the Asian giant hornet!',
+        category: 'yardwork',
+        priority: 'high',
+    }],
     reducers: {
         addTask: (state, action) => {
             const createdAt = new Date().toISOString()
