@@ -3,7 +3,19 @@ html {
   box-sizing: border-box;
 }
 
-header {
+#root {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+  cursor: pointer;
+  background-color: #d3d3d3;
+  box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-weight: 700;
 }
 
 .App {
@@ -11,10 +23,15 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 60vw;
+  height: 50vh;
 }
 
 .body {
   display: flex;
+  border-top: 2px solid black;
+  padding-top: 20px;
+  width: 100%;
 }
 
 .form {
@@ -25,6 +42,105 @@ header {
   width: 50%;
 }
 
+#sandbox-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: 1px solid black;
+  border-radius: 4px;
+  height: 30px;
+}
 
+#title-input {
+  width: 85%;
+  height: 32px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  font-size: 28px;
+  border-radius: 4px;
+  padding-left: 4px;
+}
+
+#cat-select {
+  margin-top: 4px;
+  margin-bottom: 8px;
+} 
+
+#cat-select label {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+#cat-select select {
+  height: 28px;
+  width: 128px;
+  font-size: 12px;
+}
+
+#cats input {
+  height: 28px;
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin-right: 8px;
+}
+
+#priority {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+#priority div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#priority p {
+  font-size: 18px;
+  margin: 0;
+  margin-right: 20px;
+}
+
+textarea {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 80%;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 12px;
+}
+
+#due-date {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+#due-date label {
+  margin-right: 8px;
+}
+
+.date-picker {
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+#actions {
+  margin-top: 8px;
+}
+
+#actions button {
+  margin-right: 16px;
+}
 
 

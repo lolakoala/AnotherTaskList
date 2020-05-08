@@ -40,31 +40,34 @@ const Form = () => {
             onChange={event => setTitle(event.target.value)}
             placeholder="Enter Task Title"
             required
+            id='title-input'
         />
-        {categories.length &&
+        <div id='cats'>
+            {categories.length &&
+                <div id='cat-select'>
+                    <label for="cat-select">Choose a Category:</label>
+                    <select 
+                        name="categories" 
+                        id="cat-select"
+                        value={category}
+                        onChange={(event) => setCategory(event.target.value)}
+                    >
+                        {categories.map(cat => <option value={cat}>{cat}</option>)}
+                    </select>
+                </div>
+            }
+            <input
+                type="category"
+                value={newCat}
+                onChange={event => setNewCat(event.target.value)}
+                placeholder="Enter a New Category"
+                required={!categories.length}
+            />
+            <button onClick={addNewCat}>Add New Category</button>
+        </div>
+        <div id='priority'>
+            <p>Choose a Priority Level:</p>
             <div>
-                <label for="cat-select">Choose a Category:</label>
-                <select 
-                    name="categories" 
-                    id="cat-select"
-                    value={category}
-                    onChange={(event) => setCategory(event.target.value)}
-                >
-                    {categories.map(cat => <option value={cat}>{cat}</option>)}
-                </select>
-            </div>
-        }
-        <input
-            type="category"
-            value={newCat}
-            onChange={event => setNewCat(event.target.value)}
-            placeholder="Enter a New Category"
-            required={!categories.length}
-        />
-        <button onClick={addNewCat}>Add New Category</button>
-        <p>Select a Priority Level:</p>
-        <ul>
-            <li>
                 <label>
                     <input
                         type="radio"
@@ -74,8 +77,6 @@ const Form = () => {
                     />
                     Low
                 </label>
-            </li>
-            <li>
                 <label>
                     <input
                         type="radio"
@@ -85,8 +86,6 @@ const Form = () => {
                     />
                     Medium
                 </label>
-            </li>
-            <li>
                 <label>
                     <input
                         type="radio"
@@ -96,38 +95,43 @@ const Form = () => {
                     />
                     High
                 </label>
-            </li>
-        </ul>
+            </div>
+        </div>
         <textarea
             type="text"
             value={details}
             onChange={event => setDetails(event.target.value)}
             placeholder="Enter Task Details"
         />
-        <label for="due-date-picker">Choose a Due Date:</label>
-        <DatePicker
-            id="due-date-picker"
-            selected={dueDate} 
-            onChange={date => setDueDate(date)}
-        />
+        <div id='due-date'>
+            <label for="due-date-picker">Choose a Due Date:</label>
+            <DatePicker
+                id="due-date-picker"
+                selected={dueDate} 
+                onChange={date => setDueDate(date)}
+                className='date-picker'
+            />
+        </div>
         <textarea
             type="text"
             value={notes}
             onChange={event => setNotes(event.target.value)}
             placeholder="Enter Task Notes"
         />
-        <button
-            onClick={() => {
-                dispatch(addTask({
-                title, 
-                details,
-                category,
-                priority,
-                dueDate: dueDate.toISOString(),}))
-                clearForm()
+        <div id='actions'>
+            <button
+                onClick={() => {
+                    dispatch(addTask({
+                    title, 
+                    details,
+                    category,
+                    priority,
+                    dueDate: dueDate.toISOString(),}))
+                    clearForm()
 
-            }}>Submit New Task</button>
-        <button onClick={clearForm}>Clear Task Form</button>
+                }}>Submit New Task</button>
+            <button onClick={clearForm}>Clear Task Form</button>
+        </div>
     </div>)
 }
 

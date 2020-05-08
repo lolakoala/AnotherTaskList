@@ -9,10 +9,8 @@ function App() {
     {/* keeping counter in as reference */}
 
       <div className="App">
-        <header>
-          <h1>Another Task List</h1>
-          <button>Sandbox Mode</button>
-        </header>
+        <h1>Another Task List</h1>
+        <button id='sandbox-button'>Sandbox Mode</button>
         <div className='body'>
           <Form />
           <Tasks />
