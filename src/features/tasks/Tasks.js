@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { selectTasks } from './tasksSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectTasks, markComplete } from './tasksSlice'
 
 const Card = ({task}) => {
+    const dispatch = useDispatch()
     const [expanded, setExpanded] = useState(false)
     const {
         title,
@@ -14,14 +15,18 @@ const Card = ({task}) => {
         notes,
         category,
         priority,
+        id
     } = task
+    const complete = () => {
+        dispatch(markComplete(id))
+    }
 
     return (<div className='task-card'>
         <div className='mini-task'>
             <p onClick={() => setExpanded(!expanded)}>{expanded ? '-' : '+'}</p>
             {/* if completed, strike through */}
-            <h5>{title}</h5>
-            {dateCompleted ? null : <p>✓</p>}
+            <h5 className={dateCompleted ? 'completed' : 'title'}>{title}</h5>
+            {dateCompleted ? null : <p onClick={complete}>✓</p>}
             <p>x</p>
         </div>
         {expanded ? <div className='expanded-task'>

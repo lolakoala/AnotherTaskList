@@ -176,6 +176,15 @@ textarea {
   padding-right: 4px;
 }
 
+.title {
+  text-transform: capitalize;
+}
+
+.completed {
+  text-transform: capitalize;
+  text-decoration: line-through;
+}
+
 
 
 

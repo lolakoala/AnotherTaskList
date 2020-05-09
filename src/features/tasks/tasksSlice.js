@@ -11,6 +11,7 @@ const sandboxState = [{
         category: 'household chores',
         priority: 'medium',
         example: true,
+        id: 1,
     },
     {
         title: 'example2- Weed the Garden',
@@ -23,6 +24,7 @@ const sandboxState = [{
         category: 'yardwork',
         priority: 'high',
         example: true,
+        id: 2,
 }]
 
 export const tasksSlice = createSlice({
@@ -31,9 +33,12 @@ export const tasksSlice = createSlice({
     reducers: {
         addTask: (state, action) => {
             const createdAt = new Date().toDateString()
+            const ids = [...sandboxState, ...state].map(task => parseInt(task.id, 10))
+            const id = Math.max(...ids) + 1
             const newTask = {
                 ...action.payload, 
-                createdAt, 
+                createdAt,
+                id, 
                 updatedAt: null,
                 dateCompleted: null,
                 }
@@ -45,11 +50,18 @@ export const tasksSlice = createSlice({
             } else {
                 return [...sandboxState, ...state]
             }
-        }
+        },
+        markComplete: (state, action) => {
+            const dateCompleted = new Date().toDateString()
+            const taskToUpdate = state.find(task => task.id === action.payload)
+            const updatedTask = {...taskToUpdate, dateCompleted}
+            const filteredTasks = state.filter(task => task.id !== action.payload)
+            return [...filteredTasks, updatedTask]
+        }, 
     }
 })
 
-export const { addTask, toggleSandbox } = tasksSlice.actions
+export const { addTask, toggleSandbox, markComplete } = tasksSlice.actions
 
 // thunk, in case I need it
 export const addTaskAsync = task => dispatch => {
