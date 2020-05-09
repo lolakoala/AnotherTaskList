@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const tasksSlice = createSlice({
-    name: 'tasks',
-    initialState: [{
+const sandboxState = [{
         title: 'example1- Grocery Shopping',
         details: 'Take inventory of kitchen, plan meals, and order groceries on Instacart.',
         createdAt: new Date('05/01/2020').toDateString(),
@@ -12,7 +10,8 @@ export const tasksSlice = createSlice({
         notes: 'Don\'t forget Rhonda\'s juice!',
         category: 'household chores',
         priority: 'medium',
-    }, 
+        example: true,
+    },
     {
         title: 'example2- Weed the Garden',
         details: 'Weed container garden and front flower bed. Clip any dead areas of plants.',
@@ -23,7 +22,12 @@ export const tasksSlice = createSlice({
         notes: 'Look out for the Asian giant hornet!',
         category: 'yardwork',
         priority: 'high',
-    }],
+        example: true,
+}]
+
+export const tasksSlice = createSlice({
+    name: 'tasks',
+    initialState: [...sandboxState],
     reducers: {
         addTask: (state, action) => {
             const createdAt = new Date().toDateString()
@@ -34,11 +38,18 @@ export const tasksSlice = createSlice({
                 dateCompleted: null,
                 }
             return [...state, newTask]
+        },
+        toggleSandbox: (state) => {
+            if (state.find(task => task.example)){
+                return state.filter(task => !task.example)
+            } else {
+                return [...sandboxState, ...state]
+            }
         }
     }
 })
 
-export const { addTask } = tasksSlice.actions
+export const { addTask, toggleSandbox } = tasksSlice.actions
 
 // thunk, in case I need it
 export const addTaskAsync = task => dispatch => {
