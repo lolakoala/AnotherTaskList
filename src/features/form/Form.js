@@ -126,6 +126,7 @@ const Form = () => {
                     details,
                     category,
                     priority,
+                    notes,
                     dueDate: dueDate.toISOString(),}))
                     clearForm()
 
