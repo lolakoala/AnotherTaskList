@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectTasks, markComplete } from './tasksSlice'
+import { selectTasks, markComplete, removeTask } from './tasksSlice'
 
 const Card = ({task}) => {
     const dispatch = useDispatch()
@@ -20,14 +20,16 @@ const Card = ({task}) => {
     const complete = () => {
         dispatch(markComplete(id))
     }
+    const remove = () => {
+        dispatch(removeTask(id))
+    }
 
     return (<div className='task-card'>
         <div className='mini-task'>
             <p onClick={() => setExpanded(!expanded)}>{expanded ? '-' : '+'}</p>
-            {/* if completed, strike through */}
             <h5 className={dateCompleted ? 'completed' : 'title'}>{title}</h5>
             {dateCompleted ? null : <p onClick={complete}>✓</p>}
-            <p>x</p>
+            <p onClick={remove}>x</p>
         </div>
         {expanded ? <div className='expanded-task'>
             {details && <p>{details}</p>}
