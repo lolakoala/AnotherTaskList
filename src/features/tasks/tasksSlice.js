@@ -62,10 +62,16 @@ export const tasksSlice = createSlice({
             const filteredTasks = state.filter(task => task.id !== action.payload)
             return [...filteredTasks]
         }, 
+        editTask: (state, action) => {
+            const taskToEdit = state.find(task => task.id === action.payload.id)
+            const editedTask = {...taskToEdit, ...action.payload}
+            const filteredTasks = state.filter(task => task.id !== action.payload.id)
+            return [...filteredTasks, editedTask]
+        },
     }
 })
 
-export const { addTask, toggleSandbox, markComplete, removeTask } = tasksSlice.actions
+export const { addTask, toggleSandbox, markComplete, removeTask, editTask } = tasksSlice.actions
 
 // thunk, in case I need it
 export const addTaskAsync = task => dispatch => {
