@@ -52,10 +52,12 @@ export const tasksSlice = createSlice({
             }
         },
         markComplete: (state, action) => {
+            const updatedAt = new Date().toDateString()
             const dateCompleted = new Date().toDateString()
             const taskToUpdate = state.find(task => task.id === action.payload)
-            const updatedTask = {...taskToUpdate, dateCompleted}
+            const updatedTask = {...taskToUpdate, dateCompleted, updatedAt}
             const filteredTasks = state.filter(task => task.id !== action.payload)
+            console.log(filteredTasks, state, action.payload)
             return [...filteredTasks, updatedTask]
         },
         removeTask: (state, action) => {
@@ -63,8 +65,9 @@ export const tasksSlice = createSlice({
             return [...filteredTasks]
         }, 
         editTask: (state, action) => {
+            const updatedAt = new Date().toDateString()
             const taskToEdit = state.find(task => task.id === action.payload.id)
-            const editedTask = {...taskToEdit, ...action.payload}
+            const editedTask = {...taskToEdit, ...action.payload, updatedAt}
             const filteredTasks = state.filter(task => task.id !== action.payload.id)
             return [...filteredTasks, editedTask]
         },
@@ -81,6 +84,24 @@ export const addTaskAsync = task => dispatch => {
 }
 
 // selector
-export const selectTasks = state => state.tasks
+export const selectTasks = (state) => {
+    const {sort, tasks} = state
+    if (sort === 'incomplete') {
+        return [...tasks.filter(task => !task.dateCompleted), ...tasks.filter(task => task.dateCompleted)]
+    } else if (Object.keys(sandboxState[0]).includes(sort)) {
+        const sortedTasks = tasks.slice().sort((left, right) => {
+            if (left[sort] < right[sort]) {
+                return -1
+            } 
+            if (left[sort] > right[sort]) {
+                return 1
+            } 
+            return 0
+        })
+        return sortedTasks
+    } else {
+        return tasks
+    }
+}
 
 export default tasksSlice.reducer

@@ -127,7 +127,7 @@ const Form = () => {
                     category,
                     priority,
                     notes,
-                    dueDate: dueDate.toISOString(),}))
+                    dueDate: dueDate.toDateString(),}))
                     clearForm()
 
                 }}>Submit New Task</button>

@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { selectTasks, markComplete, removeTask, editTask } from './tasksSlice'
+import { selectSort, setSort } from './sortSlice' 
 import { selectCategories } from './categoriesSlice'
 import pencil from '../../assets/pencil.svg'
 
@@ -161,11 +162,24 @@ const Card = ({task, categories}) => {
 
 const Tasks = () => {
     const tasks = useSelector(selectTasks)
-    const categories= useSelector(selectCategories) 
-    // sorting
-    // show completed?
+    const categories= useSelector(selectCategories)
+    const sort = useSelector(selectSort)
+    const dispatch = useDispatch()
 
     return (<div className='tasks'>
+        <div>
+            <p>Sort by: </p>
+            <select value={sort} onChange={event => dispatch(setSort(event.target.value))}>
+                <option value='incomplete'>incomplete</option>
+                <option value='priority'>priority</option>
+                <option value='dueDate'>date due</option>
+                <option value='category'>category</option>
+                <option value='title'>title</option>
+                <option value='dateCompleted'>date completed</option>
+                <option value='createdAt'>date created</option>
+                <option value='updatedAt'>date updated</option>
+            </select>
+        </div>
         {tasks.map(task => <Card task={task} categories={categories}/>)}
     </div>)
 }
