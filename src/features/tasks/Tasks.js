@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
@@ -18,7 +18,6 @@ const Card = ({task, categories}) => {
         notes,
         category,
         priority,
-        id
     } = task
     const dispatch = useDispatch()
     const [expanded, setExpanded] = useState(false)
@@ -29,13 +28,40 @@ const Card = ({task, categories}) => {
     const [newNotes, setNewNotes] = useState(notes)
     const [newCategory, setNewCategory] = useState(category)
     const [newPriority, setNewPriority] = useState(priority)
+    const [createDate, setCreateDate] = useState(createdAt)
+    const [updateDate, setUpdateDate] = useState(updatedAt)
+    const [completeDate, setCompleteDate] = useState(dateCompleted)
+
+    useEffect(() => {
+      const {
+          title,
+          details,
+          createdAt,
+          updatedAt,
+          dueDate,
+          dateCompleted,
+          notes,
+          category,
+          priority,
+      } = task
+
+      setNewTitle(title)
+      setNewDetails(details)
+      setNewDueDate(dueDate)
+      setNewNotes(notes)
+      setNewCategory(category)
+      setNewPriority(priority)
+      setCreateDate(createdAt)
+      setUpdateDate(updatedAt)
+      setCompleteDate(dateCompleted)
+    }, [task])
 
     const complete = () => {
-        dispatch(markComplete(id))
+        dispatch(markComplete(task.id))
     }
     const submitEdit = event => {
         dispatch(editTask({
-            id,
+            id: task.id,
             title: newTitle,
             details: newDetails,
             dueDate: typeof newDueDate === 'object' ? newDueDate.toDateString() : newDueDate,
@@ -46,7 +72,7 @@ const Card = ({task, categories}) => {
         setEditing(false)
     }
     const remove = () => {
-        dispatch(removeTask(id))
+        dispatch(removeTask(task.id))
     }
     const editTitle = event => {
         setNewTitle(event.target.value)
@@ -69,18 +95,18 @@ const Card = ({task, categories}) => {
 
     const taskTitle = <div className='mini-task'>
         <p onClick={() => setExpanded(!expanded)}>{expanded ? '-' : '+'}</p>
-        {editing ? <input type='text' id='edit-title' value={newTitle} onChange={editTitle}/> : <h5 className={dateCompleted ? 'completed' : null}>{title}</h5>}
-        {dateCompleted ? null : <p onClick={complete}>✓</p>}
+        {editing ? <input type='text' id='edit-title' value={newTitle} onChange={editTitle}/> : <h5 className={completeDate ? 'completed' : null}>{title}</h5>}
+        {completeDate ? null : <p onClick={complete}>✓</p>}
         {editing ? null : <img onClick={() => setEditing(true)} src={pencil} alt='edit' />}
         <p onClick={remove}>x</p>
     </div>
 
     const taskBody = <div>
         {details && <p>{newDetails}</p>}
-        <p>Date Created: {createdAt}</p>
-        {updatedAt && <p>Last Updated: {updatedAt}</p>}
+        <p>Date Created: {createDate}</p>
+        {updateDate && <p>Last Updated: {updateDate}</p>}
         <p>Date Due: {displayDate}</p>
-        {dateCompleted && <p>Date Completed: {dateCompleted}</p>}
+        {completeDate && <p>Date Completed: {completeDate}</p>}
         {notes && <p>Notes: {newNotes}</p>}
         {category && <p>Category: {newCategory}</p>}
         <p>Priority: {newPriority}</p>
@@ -88,8 +114,8 @@ const Card = ({task, categories}) => {
 
     const editingTaskBody = <div>
         {details && <textarea type='text' value={newDetails} onChange={editDetails} />}
-        <p>Date Created: {createdAt}</p>
-        {updatedAt && <p>Last Updated: {updatedAt}</p>}
+        <p>Date Created: {createDate}</p>
+        {updateDate && <p>Last Updated: {updateDate}</p>}
         <div>
             <label for="due-date-picker">Date Due: </label>
             <DatePicker
@@ -101,7 +127,7 @@ const Card = ({task, categories}) => {
             />
         </div>
 
-        {dateCompleted && <p>Date Completed: {dateCompleted}</p>}
+        {completeDate && <p>Date Completed: {completeDate}</p>}
         {notes && <div>
             <p>Notes: </p>
             <textarea type='text' value={newNotes} onChange={editNotes} />
