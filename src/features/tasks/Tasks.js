@@ -167,7 +167,7 @@ const Tasks = () => {
     const dispatch = useDispatch()
 
     return (<div className='tasks'>
-        <div>
+        <div className='sort'>
             <p>Sort by: </p>
             <select value={sort} onChange={event => dispatch(setSort(event.target.value))}>
                 <option value='incomplete'>incomplete</option>

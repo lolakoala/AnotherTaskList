@@ -1,4 +1,4 @@
-html { 
+html {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
 }
@@ -65,7 +65,7 @@ input {
 #cat-select {
   margin-top: 4px;
   margin-bottom: 8px;
-} 
+}
 
 #cat-select label {
   font-size: 20px;
@@ -204,6 +204,20 @@ textarea {
   margin-left: 4px;
 }
 
+.sort {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
 
+.sort p {
+  font-size: 20px;
+  margin-right: 8px;
+}
 
-
+.sort select {
+  height: 28px;
+  width: 128px;
+  font-size: 12px;
+}
