@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { selectTasks, markComplete, removeTask, editTask } from './tasksSlice'
-import { selectSort, setSort } from './sortSlice' 
+import { selectSort, setSort } from './sortSlice'
 import { selectCategories } from './categoriesSlice'
 import pencil from '../../assets/pencil.svg'
 
@@ -37,7 +37,7 @@ const Card = ({task, categories}) => {
         dispatch(editTask({
             id,
             title: newTitle,
-            details: newDetails, 
+            details: newDetails,
             dueDate: typeof newDueDate === 'object' ? newDueDate.toDateString() : newDueDate,
             notes: newNotes,
             category: newCategory,
@@ -65,7 +65,7 @@ const Card = ({task, categories}) => {
         setNewPriority(event.target.value)
         submitEdit()
     }
-    const displayDate = typeof newDueDate === 'object' ? newDueDate.toDateString() : newDueDate 
+    const displayDate = typeof newDueDate === 'object' ? newDueDate.toDateString() : newDueDate
 
     const taskTitle = <div className='mini-task'>
         <p onClick={() => setExpanded(!expanded)}>{expanded ? '-' : '+'}</p>
@@ -103,7 +103,7 @@ const Card = ({task, categories}) => {
 
         {dateCompleted && <p>Date Completed: {dateCompleted}</p>}
         {notes && <div>
-            <p>Notes: </p> 
+            <p>Notes: </p>
             <textarea type='text' value={newNotes} onChange={editNotes} />
         </div>}
         {category && <div id='edit-categories'>

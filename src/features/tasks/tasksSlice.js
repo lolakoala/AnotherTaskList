@@ -36,9 +36,9 @@ export const tasksSlice = createSlice({
             const ids = [...sandboxState, ...state].map(task => parseInt(task.id, 10))
             const id = Math.max(...ids) + 1
             const newTask = {
-                ...action.payload, 
+                ...action.payload,
                 createdAt,
-                id, 
+                id,
                 updatedAt: null,
                 dateCompleted: null,
                 }
@@ -63,7 +63,7 @@ export const tasksSlice = createSlice({
         removeTask: (state, action) => {
             const filteredTasks = state.filter(task => task.id !== action.payload)
             return [...filteredTasks]
-        }, 
+        },
         editTask: (state, action) => {
             const updatedAt = new Date().toDateString()
             const taskToEdit = state.find(task => task.id === action.payload.id)
@@ -88,14 +88,18 @@ export const selectTasks = (state) => {
     const {sort, tasks} = state
     if (sort === 'incomplete') {
         return [...tasks.filter(task => !task.dateCompleted), ...tasks.filter(task => task.dateCompleted)]
+    } else if (sort === 'priority') {
+      return [...tasks.filter(task => task.priority === 'high'),
+        ...tasks.filter(task => task.priority === 'medium'),
+        ...tasks.filter(task => task.priority === 'low')]
     } else if (Object.keys(sandboxState[0]).includes(sort)) {
         const sortedTasks = tasks.slice().sort((left, right) => {
             if (left[sort] < right[sort]) {
                 return -1
-            } 
+            }
             if (left[sort] > right[sort]) {
                 return 1
-            } 
+            }
             return 0
         })
         return sortedTasks
