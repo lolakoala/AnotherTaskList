@@ -221,3 +221,12 @@ textarea {
   width: 128px;
   font-size: 12px;
 }
+
+.edit-actions {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  display: flex;
+  justify-content: space-around;
+  width: 108px;
+}

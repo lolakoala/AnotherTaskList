@@ -97,7 +97,10 @@ const Card = ({task, categories}) => {
         <p onClick={() => setExpanded(!expanded)}>{expanded ? '-' : '+'}</p>
         {editing ? <input type='text' id='edit-title' value={newTitle} onChange={editTitle}/> : <h5 className={completeDate ? 'completed' : null}>{title}</h5>}
         {completeDate ? null : <p onClick={complete}>✓</p>}
-        {editing ? null : <img onClick={() => setEditing(true)} src={pencil} alt='edit' />}
+        {editing ? null : <img onClick={() => {
+          setExpanded(true)
+          setEditing(true)
+        }} src={pencil} alt='edit' />}
         <p onClick={remove}>x</p>
     </div>
 
@@ -112,7 +115,7 @@ const Card = ({task, categories}) => {
         <p>Priority: {newPriority}</p>
     </div>
 
-    const editingTaskBody = <div>
+    const editingTaskBody = <div style={{position: 'relative'}}>
         {details && <textarea type='text' value={newDetails} onChange={editDetails} />}
         <p>Date Created: {createDate}</p>
         {updateDate && <p>Last Updated: {updateDate}</p>}
@@ -169,6 +172,10 @@ const Card = ({task, categories}) => {
                     High
                 </label>
             </div>
+        </div>
+        <div className='edit-actions'>
+          <button onClick={submitEdit}>Save</button>
+          <button onClick={() => setEditing(false)}>Cancel</button>
         </div>
     </div>
 
