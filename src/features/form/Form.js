@@ -11,10 +11,10 @@ const Form = () => {
     const [title, setTitle] = useState('')
     const [details, setDetails] = useState('')
     const [notes, setNotes] = useState('')
-    const [category, setCategory] = useState('')
-    const [newCat, setNewCat] = useState('') 
+    const [category, setCategory] = useState('task')
+    const [newCat, setNewCat] = useState('')
     const [dueDate, setDueDate] = useState(new Date())
-    const [priority, setPriority] = useState('medium') 
+    const [priority, setPriority] = useState('medium')
     const clearForm = () => {
         setTitle('')
         setDetails('')
@@ -46,8 +46,8 @@ const Form = () => {
             {categories.length &&
                 <div id='cat-select'>
                     <label for="cat-select">Choose a Category:</label>
-                    <select 
-                        name="categories" 
+                    <select
+                        name="categories"
                         id="cat-select"
                         value={category}
                         onChange={(event) => setCategory(event.target.value)}
@@ -107,7 +107,7 @@ const Form = () => {
             <label for="due-date-picker">Choose a Due Date:</label>
             <DatePicker
                 id="due-date-picker"
-                selected={dueDate} 
+                selected={dueDate}
                 onChange={date => setDueDate(date)}
                 className='date-picker'
             />
@@ -122,7 +122,7 @@ const Form = () => {
             <button
                 onClick={() => {
                     dispatch(addTask({
-                    title, 
+                    title,
                     details,
                     category,
                     priority,

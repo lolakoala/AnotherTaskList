@@ -4,7 +4,8 @@ export const categoriesSlice = createSlice({
     name: 'categories',
     initialState: {
         1: 'household chores',
-        2: 'yardwork',
+        2: 'task',
+        3: 'yardwork',
     },
     reducers: {
         addCategory: (state, action) => {
@@ -15,11 +16,11 @@ export const categoriesSlice = createSlice({
             } else {
                 // console.log(Math.max(...Object.keys(state).map(str => parseInt(str, 10))))
                 const id = Math.max(...Object.keys(state).map(str => parseInt(str, 10))) + 1
-                return {...state, [id]: name} 
+                return {...state, [id]: name}
             }
         }
     }
-}) 
+})
 
 export const { addCategory } = categoriesSlice.actions
 
